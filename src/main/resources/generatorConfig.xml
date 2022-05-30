@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--  反向工程的配置信息  -->
+    <!-- 使用已有的配置文件 -->
+    <properties resource="application.properties"></properties>
+    <!-- 数据库驱动 -->
+    <classPathEntry location="E:/Mysql/mysql-connector-java-8.0.16.jar"/>
+    <!--  targetRuntime：设置mybaties版本  -->
+    <context id="default" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8" />
+        <!--  创建class时控制注释      -->
+        <commentGenerator >
+<!--            <property name="suppressDate" value="true"/>-->
+<!--            <property  name="suppressAllComments" value="true"/>-->
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <!-- 非必须，类型处理器，在数据库类型和java类型之间的转换控制 -->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- Entity Java Class -->
+        <!-- targetPackage 生成model类的包名 -->
+        <!-- targetProject 生成model类的路径 -->
+        <javaModelGenerator targetPackage="com.crm.entity" targetProject="./src/main/java">
+            <!-- 是否允许子包-->
+            <property name="enableSubPackages" value="false" />
+            <!--是否对类CHAR类型的列的数据进行trim操作-->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--mapper映射文件生成所在的目录为每一个数据库的表生成对应的SqlMap文件-->
+        <sqlMapGenerator targetPackage="mybatis/mappers" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- Mapper XML File -->
+        <!--targetPackage:mapper接口dao生成的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.crm.dao"  targetProject="./src/main/java">
+            <!--enableSubPackaes:是否让schema作为包的后缀-->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!-- 需要生成的数据库表 -->
+        <!--domain0bjectName:生成的domain类的名字，如果不设置，直接使用表名作为domain类的名字;可以设置为somepck.domainName，那么会自动把domainName类放到somepck包中 -->
+        <!--enableInsert(默true):指定是否生成insert语句:-->
+        <!--enableSelectByPrimaryKey(认true):指定是否生成按照主健查询对象的语句(就是getById或get);-->
+        <!--enableSelectByExample(认true):MvBatis3Simple为false，指定是否生成动态查询语句:-->
+        <!--enableUpdateByPrimaryKey(默以true):指定是否生成按照主健修改对象的语句(即update);-->
+        <!--enableDeleteByPrimaryKey(true);指定是否生成按照主键的除对象的语句(即delete);-->
+        <!--enableDeleteByExample(以true):MvBatis3Simple为false，指定是否生成动态用除语句:-->
+        <!--enableCountByExample(以true):MvBatis3Simple为false，定是否生成动态查询总条数语句(用于分页的总条数查询)-->
+        <!--enableUpdateByExample(认true):MyBatis3Simple为false，指定是否生成动态修改语句(只修改对象中不为空的属性)-->
+        <!--        用户信息-->
+        <table tableName="user_info" domainObjectName="UserInfo" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+        <!--        商品信息-->
+        <table tableName="commodities_info" domainObjectName="CommoditiesInfo" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+        <!--        进货信息-->
+        <table tableName="purchase_info" domainObjectName="PurchaseInfo" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+        <!--        库存信息-->
+        <table tableName="stock_info" domainObjectName="StockInfo" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+        <!--        客户信息-->
+        <table tableName="customer_info" domainObjectName="CustomerInfo" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+        <!--        数据字典-->
+        <table tableName="code_library" domainObjectName="CodeLibrary" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+        <!--        订单信息-->
+        <table tableName="order_info" domainObjectName="OrderInfo" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+        <!--        订单明细-->
+        <table tableName="order_detail" domainObjectName="OrderDetail" enableCountByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" enableUpdateByExample="true">
+        </table>
+
+    </context>
+</generatorConfiguration>
